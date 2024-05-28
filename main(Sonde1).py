@@ -8,7 +8,7 @@ import urandom
 WIFI_SSID = 'BRIE'
 WIFI_PASSWORD = 'Welkom01'
 
-TOPIC = b'test'  # Convert to bytes
+TOPIC = b'test2'  # Convert to bytes
 Connected = False  # global variable for the state of the connection
 broker_address = "test.local"  # Broker address
 port = 1883  # Broker port
@@ -51,10 +51,9 @@ def connect_to_wifi(ssid, password):
     print('Network config:', wlan.ifconfig())
     led.on()  # Turn on LED once connected
 
-
 def set_servo_angle(angle):
     # Convert angle (0-180 degrees) to pulse width (500-2500 microseconds)
-    pulse_width = (angle / 180.0) * 2000 + 500
+    pulse_width = (angle / 180) * 2000 + 500
     # Set duty cycle based on pulse width
     servo_pwm.duty_ns(int(pulse_width * 1000))
 
@@ -62,16 +61,16 @@ def on_message(topic, message):
     print(message.decode("utf-8"))
     if message == b'servo':
         # Set servo angle to 10 degrees
-        set_servo_angle(130)
-        time.sleep(1)  # Adjust delay time as needed
-
-        # Move servo to 180 degrees
-        set_servo_angle(10)
+        set_servo_angle(120)
         time.sleep(1)  # Adjust delay time as needed
 
         # Return servo to 10 degrees
-        set_servo_angle(130)
-
+        set_servo_angle(70)
+        
+        # Return to 180 degrees
+        time.sleep(1)
+        
+        set_servo_angle(120)
 
 connect_to_wifi(WIFI_SSID, WIFI_PASSWORD)
 
@@ -88,7 +87,7 @@ try:
         # Read analog value from microphone
         audio_level = adc.read_u16()
     
-        # Check if audio level is over 5000
+        # Check if audio level is over 7500
         if audio_level > 7500:
             client.publish(b'beep_detection2', b'beep detected')
             time.sleep(0.3)  # Adjust the sleep time as needed
@@ -97,5 +96,4 @@ except KeyboardInterrupt:
     print("exiting")
     client.disconnect()
     led.off()  # Turn off LED before exiting script
-
 
