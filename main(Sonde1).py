@@ -15,6 +15,7 @@ port = 1883  # Broker port
 user = "remco"  # Connection username
 password = "remco"  # Connection password
 client_id = "pi_pico_2"
+# Client ID must be different per device
 
 # Pin configuration for LED and servo
 LED_PIN = 2  # Replace with the GPIO pin connected to the LED
