@@ -32,7 +32,7 @@ MIC_PIN = 26  # GPIO pin connected to the microphone
 adc = ADC(Pin(MIC_PIN))
 
 def connect_to_wifi(ssid, password):
-    wlan = network.WLAN(network.STA_IF)  # create station interface
+    wlan = network.WLAN(network.STA_IF)  # create station interface to connect to
     wlan.active(True)  # activate the interface
 
     while not wlan.isconnected():  # check if the station is connected to an AP
