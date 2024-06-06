@@ -3,7 +3,7 @@ import time
 from umqtt.simple import MQTTClient
 from machine import Pin, PWM, ADC
 import urandom
-
+#updaten voor op testtelefoon
 # Network configuration
 WIFI_SSID = 'BRIE'
 WIFI_PASSWORD = 'Welkom01'
